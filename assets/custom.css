@@ -1,0 +1,12 @@
+/* テーマカスタム用のcss */
+.product-form__submit {
+  background: rgb(199, 238, 139);
+}
+
+.product-form__submit:hover {
+  background: rgb(139, 213, 238);
+}
+
+.product-form__submit:disabled {
+  background: rgb(255, 102, 102);
+}
