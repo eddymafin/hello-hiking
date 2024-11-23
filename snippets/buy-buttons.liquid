@@ -93,6 +93,24 @@
             </span>
             {%- render 'loading-spinner' -%}
           </button>
+          {% for variant in product.variants %}
+            <input
+              class="js-quantity"
+              type="hidden"
+              data-id="{{ variant.id }}"
+              value="{{ variant.inventory_quantity }}"
+            >
+          {% endfor %}
+          <div class="js-quantity-status">
+            {%- if product.selected_or_first_available_variant.inventory_quantity -%}
+              {%- if product.selected_or_first_available_variant.inventory_quantity < 5 -%}
+                Low stock
+              {%- else -%}
+                Available!
+              {%- endif -%}
+            {% else %}
+            {%- endif -%}
+          </div>
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
           {%- endif -%}
