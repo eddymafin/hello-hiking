@@ -43,6 +43,17 @@ if (!customElements.get('pickup-availability')) {
       update(variant) {
         if (variant?.available) {
           this.fetchAvailability(variant.id);
+          const variantID = variant.id;
+          const textBox = document.querySelector('.js-quantity-status');
+          const matchingElement = document.querySelector(`input.js-quantity[data-id="${variantID}"]`);
+          textBox.innerText = '';
+          if (matchingElement) {
+            if (matchingElement.value < 5) {
+              textBox.innerText = 'Available!';
+            } else {
+              textBox.innerText = 'Low stock';
+            }
+          }
         } else {
           this.removeAttribute('available');
           this.innerHTML = '';
