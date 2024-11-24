@@ -463,6 +463,10 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+
+                {% if product.selected_or_first_available_variant.metafields.custom.size %}
+                  <p>{{ product.selected_or_first_available_variant.metafields.custom.size.value }}</p>
+                {% endif %}
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
