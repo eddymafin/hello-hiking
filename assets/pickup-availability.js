@@ -43,16 +43,39 @@ if (!customElements.get('pickup-availability')) {
       update(variant) {
         if (variant?.available) {
           this.fetchAvailability(variant.id);
+          console.log(variant);
+          console.log(variant.title);
           const variantID = variant.id;
+          const variantSize = document.querySelector('.js-variant');
           const textBox = document.querySelector('.js-quantity-status');
+          if (!variantSize || !textBox) return;
+          console.log(variantSize);
           const matchingElement = document.querySelector(`input.js-quantity[data-id="${variantID}"]`);
           textBox.innerText = '';
+          variantSize.innerText = '';
+
+          // 在工数の場合のデータ更新
           if (matchingElement) {
             if (matchingElement.value < 5) {
               textBox.innerText = 'Available!';
             } else {
               textBox.innerText = 'Low stock';
             }
+          }
+
+          // サイズのバリエーションの場合の更新
+          switch (variant.title) {
+            case 'S':
+              variantSize.innerText = 'これはSサイズです';
+              break;
+            case 'M':
+              variantSize.innerText = 'これはMサイズです';
+              break;
+            case 'L':
+              variantSize.innerText = 'これはLサイズです';
+              break;
+            default:
+              break;
           }
         } else {
           this.removeAttribute('available');
